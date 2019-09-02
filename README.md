@@ -5,10 +5,10 @@ A Todo application with a REST API
 ## Features
 
 * CRUD actions on "TodoList" and "Todo Item".
-* Actuator endpoints.
+* H2 DB
 * REST API
+* Actuator endpoints.
 * Kafka integration
-* Postgres DB
 * High test coverage
 * Postman requests available
 * Docker support
