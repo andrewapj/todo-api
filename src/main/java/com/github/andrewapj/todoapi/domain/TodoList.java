@@ -14,8 +14,8 @@ import lombok.experimental.Accessors;
 @Data
 @Entity
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"id"})
 @Accessors(chain = true)
+@EqualsAndHashCode(exclude = {"id"})
 public class TodoList {
 
     @Id

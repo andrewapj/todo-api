@@ -17,6 +17,6 @@ public class TodoListPersistenceServiceImpl implements TodoListPersistenceServic
 
     @Override
     public TodoList create() {
-        return repository.save(TodoListFactory.getNewTodoList(null));
+        return repository.save(TodoListFactory.buildNewTodoList(null));
     }
 }

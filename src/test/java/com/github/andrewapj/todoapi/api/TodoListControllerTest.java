@@ -28,7 +28,7 @@ public class TodoListControllerTest {
     @Test
     public void shouldCreateNewTodoList() {
 
-        when(persistenceService.create()).thenReturn(TodoListFactory.getNewTodoList(1L));
+        when(persistenceService.create()).thenReturn(TodoListFactory.buildNewTodoList(1L));
 
         ApiTodoList todoList = given()
             .standaloneSetup(new TodoListController(persistenceService, mapper))

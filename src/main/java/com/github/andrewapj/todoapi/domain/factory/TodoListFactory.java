@@ -7,7 +7,7 @@ import com.github.andrewapj.todoapi.domain.TodoList;
  */
 public class TodoListFactory {
 
-    public static TodoList getNewTodoList(final Long id) {
+    public static TodoList buildNewTodoList(final Long id) {
         return new TodoList()
             .setId(id);
     }
