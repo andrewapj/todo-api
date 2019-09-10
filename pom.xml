@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-<!--            <optional>true</optional>-->
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -71,6 +71,12 @@
             <version>${rest.assured.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>3.1.9</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -87,6 +93,10 @@
                     <configLocation>
                         https://raw.githubusercontent.com/andrewapj/Build/master/java/checkstyle/checkstyle.xml
                     </configLocation>
+                    <!-- Prevent Checkstyle from scanning directories like 'generated-sources' -->
+                    <sourceDirectories>
+                        <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                    </sourceDirectories>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>false</failsOnError>

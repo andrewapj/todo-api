@@ -1,16 +1,24 @@
 package com.github.andrewapj.todoapi.api.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
+import lombok.Value;
 
 /**
  * Api bean representing a TodoList.
  */
-@Data
-@NoArgsConstructor
-@Accessors(chain = true)
-public class ApiTodoList {
+@Value
+@Builder
+@JsonDeserialize(builder = ApiTodoList.ApiTodoListBuilder.class)
+public final class ApiTodoList {
 
-    private Long id;
+    private final Long id;
+
+    /**
+     * Builder for this bean that also maintains compatibility with Jackson.
+     */
+    @JsonPOJOBuilder(withPrefix = "")
+    public static final class ApiTodoListBuilder {
+    }
 }
