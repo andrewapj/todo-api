@@ -19,6 +19,7 @@
         <rest.assured.version>3.0.0</rest.assured.version>
         <org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
         <lombok.version>1.18.8</lombok.version>
+        <equalsverifier.version>3.1.9</equalsverifier.version>
     </properties>
 
     <dependencies>
@@ -74,7 +75,7 @@
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>3.1.9</version>
+            <version>${equalsverifier.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
