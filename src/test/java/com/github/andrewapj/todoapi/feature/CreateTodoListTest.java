@@ -3,7 +3,7 @@ package com.github.andrewapj.todoapi.feature;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.andrewapj.todoapi.api.TodoListController;
+import com.github.andrewapj.todoapi.api.controller.TodoListController;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.feature.spec.RequestSpecification;
@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class CreateTodoListFeatureTest {
+public class CreateTodoListTest {
 
     private static final String PATH = "todolists/";
 
@@ -27,7 +27,7 @@ public class CreateTodoListFeatureTest {
     @PersistenceContext EntityManager entityManager;
 
     @Test
-    public void shouldCreateEmptyTodoList() {
+    public void should_CreateEmptyTodoList() {
 
         // When: A request to create a new TodoList is made
         MockMvcResponse response = given()

@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.infrastructure;
+package com.github.andrewapj.todoapi.infrastructure.repository;
 
 import com.github.andrewapj.todoapi.domain.TodoList;
 import org.springframework.data.jpa.repository.JpaRepository;

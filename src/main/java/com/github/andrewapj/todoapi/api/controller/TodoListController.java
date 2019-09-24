@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.api;
+package com.github.andrewapj.todoapi.api.controller;
 
 import com.github.andrewapj.todoapi.api.mapper.TodoListMapper;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
