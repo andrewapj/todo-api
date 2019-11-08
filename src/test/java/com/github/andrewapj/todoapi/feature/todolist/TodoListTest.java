@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
@@ -27,6 +28,7 @@ public class TodoListTest {
     @PersistenceContext EntityManager entityManager;
 
     @Test
+    @Sql("classpath:sql/truncate.sql")
     public void should_CreateEmptyTodoList() {
 
         // When: A request to create a new TodoList is made

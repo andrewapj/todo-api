@@ -1,16 +1,20 @@
-package com.github.andrewapj.todoapi.factory;
+package com.github.andrewapj.todoapi.config;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneOffset;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * Test factory to build a fixed {@link Clock} for unit testing.
+ * Configuration class to build a {@link Clock}.
  */
-public class ClockFactory {
+@Configuration
+public class ClockConfig {
 
-    public static Clock getDefaultFixedClock() {
+    @Bean("fixed")
+    public Clock getClock() {
         return Clock.fixed(
             LocalDateTime.of(2019, Month.SEPTEMBER, 24, 18, 0)
                 .atZone(ZoneOffset.UTC)

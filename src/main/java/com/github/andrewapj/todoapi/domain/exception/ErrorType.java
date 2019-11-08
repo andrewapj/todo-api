@@ -5,5 +5,6 @@ package com.github.andrewapj.todoapi.domain.exception;
  */
 public enum ErrorType {
 
-    CREATE_TODOLIST
+    INTERNAL_SERVER_ERROR,
+    TODOLIST_NOTFOUND
 }

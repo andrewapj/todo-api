@@ -2,11 +2,12 @@ package com.github.andrewapj.todoapi.api.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.github.andrewapj.todoapi.domain.TodoList;
 import lombok.Builder;
 import lombok.Value;
 
 /**
- * Api bean representing a TodoList.
+ * Api bean representing a {@link TodoList}.
  */
 @Value
 @Builder

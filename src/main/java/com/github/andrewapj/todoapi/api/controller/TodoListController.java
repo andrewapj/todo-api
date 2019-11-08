@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller that defines endpoints for operations on TodoLists.
+ * Controller that defines endpoints for operations on {@link TodoList}.
  */
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +22,10 @@ public class TodoListController {
     private final TodoListPersistenceService todoListPersistenceService;
     private final TodoListMapper mapper;
 
+    /**
+     * Create a new empty {@link TodoList}.
+     * @return      the {@link ApiTodoList}.
+     */
     @PostMapping
     public ResponseEntity<ApiTodoList> create() {
 
