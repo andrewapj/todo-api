@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.feature;
+package com.github.andrewapj.todoapi.feature.todolist;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class CreateTodoListTest {
+public class TodoListTest {
 
     private static final String PATH = "todolists/";
 

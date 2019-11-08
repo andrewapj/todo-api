@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.feature;
+package com.github.andrewapj.todoapi.feature.todolist;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.assertj.core.api.Assertions.assertThat;
