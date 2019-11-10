@@ -7,7 +7,6 @@ import com.github.andrewapj.todoapi.api.controller.TodoListController;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.feature.spec.RequestSpecification;
-import io.restassured.module.mockmvc.response.MockMvcResponse;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.junit.Test;
@@ -32,13 +31,11 @@ public class TodoListTest {
     public void should_CreateEmptyTodoList() {
 
         // When: A request to create a new TodoList is made
-        MockMvcResponse response = given()
+        // Then: The response should be correct
+        ApiTodoList todoList = given()
             .standaloneSetup(controller)
             .spec(RequestSpecification.SPEC)
-            .post(PATH);
-
-        // Then: The response should be correct
-        ApiTodoList todoList = response
+            .post(PATH)
             .then()
             .statusCode(HttpStatus.CREATED.value())
             .extract().as(ApiTodoList.class);
