@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +40,27 @@ public class TodoController {
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
+            .body(mapper.toApiObject(todo));
+    }
+
+    /**
+     * Updates an existing {@link Todo}.
+     *
+     * @param todoListId        the todo list id that the todo is attached to.
+     * @param todoId            the id of the todo item.
+     * @param apiTodo           the data used for the update.
+     * @return                  the updated item.
+     */
+    @PutMapping(value = "/todolists/{todoListId}/todos/{todoId}",
+        consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ApiTodo> updateTodo(@PathVariable Long todoListId,
+                                       @PathVariable Long todoId,
+                                       @RequestBody ApiTodo apiTodo) {
+        Todo todo = todoPersistenceService.update(
+            todoListId, todoId, mapper.toDomainObject(apiTodo));
+
+        return ResponseEntity
+            .status(HttpStatus.OK)
             .body(mapper.toApiObject(todo));
     }
 }

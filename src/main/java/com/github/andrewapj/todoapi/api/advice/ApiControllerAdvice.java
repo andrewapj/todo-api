@@ -3,7 +3,7 @@ package com.github.andrewapj.todoapi.api.advice;
 import com.github.andrewapj.todoapi.api.mapper.ExceptionMapper;
 import com.github.andrewapj.todoapi.api.model.ApiError;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
-import com.github.andrewapj.todoapi.domain.exception.PersistenceException;
+import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
 import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,16 +22,15 @@ public class ApiControllerAdvice {
     private final Clock clock;
 
     /**
-     * Handles {@link PersistenceException} for the API.
+     * Handles exceptions where a required resource was not found.
      *
      * @param ex        the exception to handle.
      * @return          the api error response.
      */
-    @ExceptionHandler(PersistenceException.class)
-    public ResponseEntity<ApiError> handleException(PersistenceException ex) {
-
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiError> handleException(NotFoundException ex) {
         return ResponseEntity
-            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .status(HttpStatus.NOT_FOUND)
             .body(mapper.toApiObject(ex));
     }
 

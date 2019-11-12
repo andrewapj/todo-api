@@ -1,7 +1,6 @@
 package com.github.andrewapj.todoapi.service.impl;
 
 import com.github.andrewapj.todoapi.domain.TodoList;
-import com.github.andrewapj.todoapi.domain.factory.TodoListFactory;
 import com.github.andrewapj.todoapi.infrastructure.repository.TodoListRepository;
 import com.github.andrewapj.todoapi.service.TodoListPersistenceService;
 import java.time.Clock;
@@ -22,6 +21,6 @@ public class TodoListPersistenceServiceImpl implements TodoListPersistenceServic
 
     @Override
     public TodoList create() {
-        return repository.save(TodoListFactory.buildNewTodoList(null));
+        return repository.save(new TodoList().setId(null));
     }
 }

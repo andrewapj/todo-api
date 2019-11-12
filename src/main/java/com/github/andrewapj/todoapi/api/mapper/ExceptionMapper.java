@@ -1,7 +1,7 @@
 package com.github.andrewapj.todoapi.api.mapper;
 
 import com.github.andrewapj.todoapi.api.model.ApiError;
-import com.github.andrewapj.todoapi.domain.exception.PersistenceException;
+import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
 import org.mapstruct.Mapper;
 
 /**
@@ -10,5 +10,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ExceptionMapper {
 
-    ApiError toApiObject(PersistenceException exception);
+    ApiError toApiObject(NotFoundException exception);
 }

@@ -26,4 +26,15 @@ public class Todo {
 
     private String text;
     private boolean completed;
+
+    /**
+     * Merges in the supplied {@link Todo} with this one.
+     * @param newTodo   the todo to merge in.
+     * @return          this modified todo.
+     */
+    public Todo merge(final Todo newTodo) {
+        return this
+            .setText(newTodo.getText())
+            .setCompleted(newTodo.isCompleted());
+    }
 }

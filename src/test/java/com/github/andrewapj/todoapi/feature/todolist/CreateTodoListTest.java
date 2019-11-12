@@ -19,9 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TodoListTest {
-
-    private static final String PATH = "todolists/";
+public class CreateTodoListTest {
 
     @Autowired private TodoListController controller;
     @PersistenceContext EntityManager entityManager;
@@ -35,7 +33,7 @@ public class TodoListTest {
         ApiTodoList todoList = given()
             .standaloneSetup(controller)
             .spec(RequestSpecification.SPEC)
-            .post(PATH)
+            .post("todolists/")
             .then()
             .statusCode(HttpStatus.CREATED.value())
             .extract().as(ApiTodoList.class);
