@@ -28,7 +28,7 @@ public class ApiControllerAdvice {
      * @return          the api error response.
      */
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ApiError> handleException(NotFoundException ex) {
+    public ResponseEntity<ApiError> handleException(final NotFoundException ex) {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(mapper.toApiObject(ex));
@@ -41,7 +41,7 @@ public class ApiControllerAdvice {
      * @return          the api error response.
      */
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiError> handleException(RuntimeException ex) {
+    public ResponseEntity<ApiError> handleException(final RuntimeException ex) {
 
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)

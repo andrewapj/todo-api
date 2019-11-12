@@ -33,8 +33,8 @@ public class TodoController {
      */
     @PostMapping(value = "/todolists/{todoListId}/todos",
         consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ApiTodo> createAndAdd(@PathVariable Long todoListId,
-                                         @RequestBody ApiTodo apiTodo) {
+    ResponseEntity<ApiTodo> createAndAdd(final @PathVariable Long todoListId,
+                                         final @RequestBody ApiTodo apiTodo) {
 
         Todo todo = todoPersistenceService.create(todoListId, mapper.toDomainObject(apiTodo));
 
@@ -53,9 +53,9 @@ public class TodoController {
      */
     @PutMapping(value = "/todolists/{todoListId}/todos/{todoId}",
         consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ApiTodo> updateTodo(@PathVariable Long todoListId,
-                                       @PathVariable Long todoId,
-                                       @RequestBody ApiTodo apiTodo) {
+    ResponseEntity<ApiTodo> updateTodo(final @PathVariable Long todoListId,
+                                       final @PathVariable Long todoId,
+                                       final @RequestBody ApiTodo apiTodo) {
         Todo todo = todoPersistenceService.update(
             todoListId, todoId, mapper.toDomainObject(apiTodo));
 
