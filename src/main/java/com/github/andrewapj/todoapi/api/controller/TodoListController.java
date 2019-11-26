@@ -7,8 +7,9 @@ import com.github.andrewapj.todoapi.service.TodoListPersistenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/todolists")
 public class TodoListController {
 
     private final TodoListPersistenceService todoListPersistenceService;
@@ -26,13 +26,31 @@ public class TodoListController {
      * Create a new empty {@link TodoList}.
      * @return      the {@link ApiTodoList}.
      */
-    @PostMapping
+    @PostMapping(value = "/todolists")
     public ResponseEntity<ApiTodoList> create() {
 
         TodoList todoList = todoListPersistenceService.create();
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
+            .body(mapper.toApiObject(todoList));
+    }
+
+    /**
+     * Deletes a todo from the todo list.
+     *
+     * @param todoListId    the todo list id.
+     * @param todoId        the todo to delete.
+     * @return              the current todo list.
+     */
+    @DeleteMapping(value = "/todolists/{todoListId}/todos/{todoId}")
+    ResponseEntity<ApiTodoList> deleteTodo(@PathVariable final Long todoListId,
+                                           @PathVariable final Long todoId) {
+
+        TodoList todoList = todoListPersistenceService.deleteTodo(todoListId, todoId);
+
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
             .body(mapper.toApiObject(todoList));
     }
 }

@@ -29,10 +29,16 @@ public class TodoList {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "todo_list_id")
     private List<Todo> items = new ArrayList<>();
 
+    /**
+     * Adds a todo to this todo list.
+     *
+     * @param todo  the todo item
+     * @return      a list of the todos attached to this todo list.
+     */
     public List<Todo> addItem(final Todo todo) {
         items.add(todo);
         return items;
