@@ -6,8 +6,10 @@ import static org.hibernate.testing.transaction.TransactionUtil.doInJPA;
 
 import com.github.andrewapj.todoapi.api.advice.ApiControllerAdvice;
 import com.github.andrewapj.todoapi.api.controller.TodoListController;
+import com.github.andrewapj.todoapi.api.model.ApiError;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.domain.TodoList;
+import com.github.andrewapj.todoapi.domain.exception.ErrorType;
 import com.github.andrewapj.todoapi.feature.spec.RequestSpecification;
 import javax.persistence.EntityManagerFactory;
 import lombok.Getter;
@@ -51,5 +53,45 @@ public class DeleteTodoTest {
             TodoList todoListInDb = em.find(TodoList.class, 1L);
             assertThat(todoListInDb.getItems().size()).isEqualTo(1);
         });
+    }
+
+    @Test
+    @Sql({"classpath:sql/truncate.sql"})
+    public void shouldGet404WhenDeletingTodoFromMissingList() {
+
+        // When: We try to delete a todo from a list that does not exist.
+        // Then: We should get a 404
+        ApiError apiError = given()
+            .standaloneSetup(controller, apiControllerAdvice)
+            .spec(RequestSpecification.SPEC)
+            .delete("/todolists/1/todos/2")
+            .then()
+            .statusCode(HttpStatus.NOT_FOUND.value())
+            .extract()
+            .as(ApiError.class);
+
+        // And: The error response should be correct
+        assertThat(apiError.getErrorType()).isEqualTo(ErrorType.TODOLIST_NOTFOUND);
+        assertThat(apiError.getObjectId()).isEqualTo("1");
+    }
+
+    @Test
+    @Sql({"classpath:sql/truncate.sql","classpath:/sql/empty_todolist_only.sql"})
+    public void shouldGet404WhenDeletingMissingTodo() {
+
+        // When: We try to delete a missing todo form a todolist without items
+        //Then: We should get a 404
+        ApiError apiError = given()
+            .standaloneSetup(controller, apiControllerAdvice)
+            .spec(RequestSpecification.SPEC)
+            .delete("/todolists/1/todos/2")
+            .then()
+            .statusCode(HttpStatus.NOT_FOUND.value())
+            .extract()
+            .as(ApiError.class);
+
+        // And: The error response should be correct
+        assertThat(apiError.getErrorType()).isEqualTo(ErrorType.TODO_NOTFOUND);
+        assertThat(apiError.getObjectId()).isEqualTo("2");
     }
 }
