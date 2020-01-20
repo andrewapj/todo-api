@@ -4,11 +4,16 @@ import com.github.andrewapj.todoapi.api.mapper.TodoListMapper;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.api.model.EmptyResponse;
 import com.github.andrewapj.todoapi.domain.TodoList;
-import com.github.andrewapj.todoapi.service.TodoListPersistenceService;
+import com.github.andrewapj.todoapi.domain.exception.ErrorType;
+import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
+import com.github.andrewapj.todoapi.service.persistence.TodoListPersistenceService;
+import com.github.andrewapj.todoapi.service.query.TodoListQueryService;
+import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +25,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TodoListController {
 
+    private final TodoListQueryService todoListQueryService;
     private final TodoListPersistenceService todoListPersistenceService;
     private final TodoListMapper mapper;
+    private final Clock clock;
+
+    @GetMapping(value = "/todolists/{todoListId}")
+    public ResponseEntity<ApiTodoList> getById(@PathVariable final Long todoListId) {
+
+        return todoListQueryService.findById(todoListId)
+            .map(mapper::toApiObject)
+            .map(apiTodoList ->
+                ResponseEntity.status(HttpStatus.OK).body(apiTodoList))
+            .orElseThrow(() -> NotFoundException.builder()
+                .errorType(ErrorType.TODOLIST_NOTFOUND)
+                .objectId(String.valueOf(todoListId))
+                .timestamp(String.valueOf(clock.millis()))
+                .build());
+    }
 
     /**
      * Create a new empty {@link TodoList}.

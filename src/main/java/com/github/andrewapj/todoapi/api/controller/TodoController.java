@@ -4,7 +4,7 @@ import com.github.andrewapj.todoapi.api.mapper.TodoMapper;
 import com.github.andrewapj.todoapi.api.model.ApiTodo;
 import com.github.andrewapj.todoapi.domain.Todo;
 import com.github.andrewapj.todoapi.domain.TodoList;
-import com.github.andrewapj.todoapi.service.TodoPersistenceService;
+import com.github.andrewapj.todoapi.service.persistence.TodoPersistenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

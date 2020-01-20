@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.service.impl;
+package com.github.andrewapj.todoapi.service.persistence.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;

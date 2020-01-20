@@ -1,4 +1,4 @@
-package com.github.andrewapj.todoapi.service;
+package com.github.andrewapj.todoapi.service.persistence;
 
 import com.github.andrewapj.todoapi.domain.Todo;
 

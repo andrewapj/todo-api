@@ -1,11 +1,11 @@
-package com.github.andrewapj.todoapi.service.impl;
+package com.github.andrewapj.todoapi.service.persistence.impl;
 
 import com.github.andrewapj.todoapi.domain.Todo;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
 import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
 import com.github.andrewapj.todoapi.infrastructure.repository.TodoListRepository;
-import com.github.andrewapj.todoapi.service.TodoPersistenceService;
+import com.github.andrewapj.todoapi.service.persistence.TodoPersistenceService;
 import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
