@@ -28,10 +28,19 @@ public class TodoListPersistenceServiceImpl implements TodoListPersistenceServic
     }
 
     @Override
-    public TodoList deleteTodo(final long todoList, final long todoId) {
+    public void delete(final long todoListId) {
 
-        TodoList foundTodoList = repository.findById(todoList)
-            .orElseThrow(() -> buildNotFoundException(ErrorType.TODOLIST_NOTFOUND, todoList));
+        TodoList todoList = repository.findById(todoListId)
+            .orElseThrow(() -> buildNotFoundException(ErrorType.TODOLIST_NOTFOUND, todoListId));
+
+        repository.delete(todoList);
+    }
+
+    @Override
+    public TodoList deleteTodo(final long todoListId, final long todoId) {
+
+        TodoList foundTodoList = repository.findById(todoListId)
+            .orElseThrow(() -> buildNotFoundException(ErrorType.TODOLIST_NOTFOUND, todoListId));
 
         Todo foundTodo = foundTodoList.getItems().stream()
             .filter(todo -> todo.getId().equals(todoId))

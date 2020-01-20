@@ -2,6 +2,7 @@ package com.github.andrewapj.todoapi.api.controller;
 
 import com.github.andrewapj.todoapi.api.mapper.TodoListMapper;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
+import com.github.andrewapj.todoapi.api.model.EmptyResponse;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.service.TodoListPersistenceService;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,14 @@ public class TodoListController {
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .body(mapper.toApiObject(todoList));
+    }
+
+    @DeleteMapping(value = "/todolists/{todoListId}")
+    ResponseEntity<EmptyResponse> delete(@PathVariable final Long todoListId) {
+
+        todoListPersistenceService.delete(todoListId);
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body(new EmptyResponse());
     }
 }

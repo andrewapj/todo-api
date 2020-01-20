@@ -39,6 +39,18 @@ public class TodoListPersistenceServiceImplTest {
 
     @Test
     @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    public void shouldDeleteTodoList() {
+
+        service.delete(1L);
+        doInJPA(this::getEntityManagerFactory, em -> {
+            assertThat(em.find(TodoList.class, 1L)).isNull();
+            assertThat(em.find(Todo.class, 1L)).isNull();
+            assertThat(em.find(Todo.class, 2L)).isNull();
+        });
+    }
+
+    @Test
+    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldDeleteExistingTodo() {
 
         TodoList todoList = service.deleteTodo(1L, 2L);
@@ -74,5 +86,19 @@ public class TodoListPersistenceServiceImplTest {
             assertThat(ex.getErrorType()).isEqualTo(ErrorType.TODOLIST_NOTFOUND);
             assertThat(ex.getObjectId()).isEqualTo("999");
         }
+    }
+
+    @Test
+    @Sql({"classpath:sql/truncate.sql"})
+    public void shouldNotDeleteMissingTodoList() {
+
+        try {
+            service.delete(999L);
+            fail("Should get a not found exception - todo list not found");
+        } catch (NotFoundException ex) {
+            assertThat(ex.getErrorType()).isEqualTo(ErrorType.TODOLIST_NOTFOUND);
+            assertThat(ex.getObjectId()).isEqualTo("999");
+        }
+
     }
 }
