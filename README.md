@@ -1,4 +1,4 @@
-# TODO-API - Work in progress
+# TODO-API
 
 A Todo application with a REST API
 
@@ -8,7 +8,6 @@ A Todo application with a REST API
 * H2 DB
 * REST API
 * Actuator endpoints.
-* Kafka integration
 * High test coverage
 * Postman requests available
 * Docker support
@@ -43,4 +42,6 @@ This will build the application jar, run the tests and run the code quality plug
 
 ## Notes
 
+- The actuator endpoints are available at
+```http://localhost:8080/actuator/```
 - The JaCoCo reports are located under ```target/site/jacoco```
