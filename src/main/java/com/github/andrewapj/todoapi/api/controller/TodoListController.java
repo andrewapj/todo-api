@@ -37,7 +37,7 @@ public class TodoListController {
      *
      * @return      a summary of all the todo lists.
      */
-    @GetMapping(value = "/todolists/")
+    @GetMapping(value = "/todolists")
     public ResponseEntity<List<ApiTodoListSummary>> getSummaries() {
 
         return ResponseEntity

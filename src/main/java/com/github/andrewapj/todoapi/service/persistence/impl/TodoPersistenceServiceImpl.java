@@ -33,6 +33,7 @@ public class TodoPersistenceServiceImpl implements TodoPersistenceService {
                     .timestamp(String.valueOf(clock.millis()))
                     .build());
 
+        todo.setId(null);
         todoList.addItem(todo);
         return todo;
     }

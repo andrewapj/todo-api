@@ -38,6 +38,7 @@ This will build the application jar, run the tests and run the code quality plug
 ### Running via docker
 
 - Run docker locally on your machine
+- Build the docker image (instructions above)
 - ```docker run -p8080:8080 todo-api```
 
 ## Notes
