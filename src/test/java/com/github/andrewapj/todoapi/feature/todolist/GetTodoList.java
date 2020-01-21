@@ -9,6 +9,8 @@ import com.github.andrewapj.todoapi.api.model.ApiError;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
 import com.github.andrewapj.todoapi.feature.spec.RequestSpecification;
+import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,27 @@ public class GetTodoList {
 
         // And: The data should be correct.
         assertThat(apiTodoList.getItems().size()).isEqualTo(2);
+    }
+
+    @Test
+    @Sql({"classpath:sql/truncate.sql","classpath:/sql/two_todolists_with_two_todos.sql"})
+    public void shouldGetTodoListSummaries() {
+
+        // When: We request all the todolists
+        // Then: The response should be correct.
+        List<Map<String, Integer>> summaryList = given()
+            .standaloneSetup(controller,advice)
+            .spec(RequestSpecification.SPEC)
+            .get("todolists/")
+            .then()
+            .statusCode(HttpStatus.OK.value())
+            .extract()
+            .jsonPath().getList("");
+
+        // And: The response should be correct.
+        assertThat(summaryList.size()).isEqualTo(2);
+        assertThat(summaryList.get(0).get("todosCount")).isEqualTo(2);
+        assertThat(summaryList.get(1).get("todosCount")).isEqualTo(2);
     }
 
     @Test

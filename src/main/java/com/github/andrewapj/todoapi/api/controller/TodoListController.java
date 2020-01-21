@@ -2,6 +2,7 @@ package com.github.andrewapj.todoapi.api.controller;
 
 import com.github.andrewapj.todoapi.api.mapper.TodoListMapper;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
+import com.github.andrewapj.todoapi.api.model.ApiTodoListSummary;
 import com.github.andrewapj.todoapi.api.model.EmptyResponse;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
@@ -9,6 +10,7 @@ import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
 import com.github.andrewapj.todoapi.service.persistence.TodoListPersistenceService;
 import com.github.andrewapj.todoapi.service.query.TodoListQueryService;
 import java.time.Clock;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +32,23 @@ public class TodoListController {
     private final TodoListMapper mapper;
     private final Clock clock;
 
+    @GetMapping(value = "/todolists/")
+    public ResponseEntity<List<ApiTodoListSummary>> getSummaries() {
+
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(mapper.toApiObject(todoListQueryService.findSummaries()));
+    }
+
     @GetMapping(value = "/todolists/{todoListId}")
     public ResponseEntity<ApiTodoList> getById(@PathVariable final Long todoListId) {
 
-        return todoListQueryService.findById(todoListId)
+        return todoListQueryService.findByIdWithTodos(todoListId)
             .map(mapper::toApiObject)
             .map(apiTodoList ->
-                ResponseEntity.status(HttpStatus.OK).body(apiTodoList))
+                ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(apiTodoList))
             .orElseThrow(() -> NotFoundException.builder()
                 .errorType(ErrorType.TODOLIST_NOTFOUND)
                 .objectId(String.valueOf(todoListId))
