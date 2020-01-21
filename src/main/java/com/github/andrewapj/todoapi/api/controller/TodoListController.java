@@ -1,9 +1,9 @@
 package com.github.andrewapj.todoapi.api.controller;
 
 import com.github.andrewapj.todoapi.api.mapper.TodoListMapper;
+import com.github.andrewapj.todoapi.api.model.ApiEmptyResponse;
 import com.github.andrewapj.todoapi.api.model.ApiTodoList;
 import com.github.andrewapj.todoapi.api.model.ApiTodoListSummary;
-import com.github.andrewapj.todoapi.api.model.EmptyResponse;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
 import com.github.andrewapj.todoapi.domain.exception.NotFoundException;
@@ -32,6 +32,11 @@ public class TodoListController {
     private final TodoListMapper mapper;
     private final Clock clock;
 
+    /**
+     * Get a summary of all the todo lists in the system.
+     *
+     * @return      a summary of all the todo lists.
+     */
     @GetMapping(value = "/todolists/")
     public ResponseEntity<List<ApiTodoListSummary>> getSummaries() {
 
@@ -40,6 +45,12 @@ public class TodoListController {
             .body(mapper.toApiObject(todoListQueryService.findSummaries()));
     }
 
+    /**
+     * Gets a todo list and its todos.
+     *
+     * @param todoListId    the todo list id.
+     * @return              the todo list.
+     */
     @GetMapping(value = "/todolists/{todoListId}")
     public ResponseEntity<ApiTodoList> getById(@PathVariable final Long todoListId) {
 
@@ -58,6 +69,7 @@ public class TodoListController {
 
     /**
      * Create a new empty {@link TodoList}.
+     *
      * @return      the {@link ApiTodoList}.
      */
     @PostMapping(value = "/todolists")
@@ -88,12 +100,18 @@ public class TodoListController {
             .body(mapper.toApiObject(todoList));
     }
 
+    /**
+     * Deletes a todo list and its todos.
+     *
+     * @param todoListId        the todolist id.
+     * @return                  HTTP 204 if the items was deleted.
+     */
     @DeleteMapping(value = "/todolists/{todoListId}")
-    ResponseEntity<EmptyResponse> delete(@PathVariable final Long todoListId) {
+    ResponseEntity<ApiEmptyResponse> delete(@PathVariable final Long todoListId) {
 
         todoListPersistenceService.delete(todoListId);
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .body(new EmptyResponse());
+            .body(new ApiEmptyResponse());
     }
 }

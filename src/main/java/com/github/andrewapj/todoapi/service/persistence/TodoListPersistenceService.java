@@ -19,6 +19,8 @@ public interface TodoListPersistenceService {
 
     /**
      * Delete this todolist.
+     *
+     * @param todoListId    the todolist id.
      */
     void delete(long todoListId);
 

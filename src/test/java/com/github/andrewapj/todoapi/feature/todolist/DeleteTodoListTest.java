@@ -6,8 +6,8 @@ import static org.hibernate.testing.transaction.TransactionUtil.doInJPA;
 
 import com.github.andrewapj.todoapi.api.advice.ApiControllerAdvice;
 import com.github.andrewapj.todoapi.api.controller.TodoListController;
+import com.github.andrewapj.todoapi.api.model.ApiEmptyResponse;
 import com.github.andrewapj.todoapi.api.model.ApiError;
-import com.github.andrewapj.todoapi.api.model.EmptyResponse;
 import com.github.andrewapj.todoapi.domain.Todo;
 import com.github.andrewapj.todoapi.domain.TodoList;
 import com.github.andrewapj.todoapi.domain.exception.ErrorType;
@@ -42,7 +42,7 @@ public class DeleteTodoListTest {
             .delete("/todolists/1")
             .then()
             .statusCode(HttpStatus.NO_CONTENT.value())
-            .extract().as(EmptyResponse.class);
+            .extract().as(ApiEmptyResponse.class);
 
         // And: The todolist and the todos should not be in the DB.
         doInJPA(this::getEntityManagerFactory, em -> {
