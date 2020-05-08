@@ -18,6 +18,9 @@ public final class ApiTodo {
     private final String text;
     private final boolean completed;
 
+    /**
+     * Builder for the class.
+     */
     @JsonPOJOBuilder(withPrefix = "")
     public static final class ApiTodoBuilder {
 
