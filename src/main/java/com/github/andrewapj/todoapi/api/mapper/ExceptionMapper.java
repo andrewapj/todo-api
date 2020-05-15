@@ -10,5 +10,11 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ExceptionMapper {
 
+    /**
+     * Maps from a {@link NotFoundException} to an {@link ApiError} object.
+     *
+     * @param exception The exception to map into an api error.
+     * @return The api representation of the exception.
+     */
     ApiError toApiObject(NotFoundException exception);
 }

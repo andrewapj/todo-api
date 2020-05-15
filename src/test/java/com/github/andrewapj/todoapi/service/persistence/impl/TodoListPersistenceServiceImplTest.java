@@ -21,8 +21,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class TodoListPersistenceServiceImplTest {
 
-    @Autowired private TodoListPersistenceServiceImpl service;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoListPersistenceServiceImpl service;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
     @Sql("classpath:sql/truncate.sql")
@@ -38,7 +41,7 @@ public class TodoListPersistenceServiceImplTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldDeleteTodoList() {
 
         service.delete(1L);
@@ -50,7 +53,7 @@ public class TodoListPersistenceServiceImplTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldDeleteExistingTodo() {
 
         TodoList todoList = service.deleteTodo(1L, 2L);
@@ -63,11 +66,11 @@ public class TodoListPersistenceServiceImplTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:sql/empty_todolist_only.sql"})
     public void shouldNotDeleteMissingTodo() {
 
         try {
-            service.deleteTodo(1L,999L);
+            service.deleteTodo(1L, 999L);
             fail("Should get a not found exception - todo not found");
         } catch (NotFoundException ex) {
             assertThat(ex.getErrorType()).isEqualTo(ErrorType.TODO_NOTFOUND);
@@ -80,7 +83,7 @@ public class TodoListPersistenceServiceImplTest {
     public void shouldNotDeleteTodo_WithMissingTodoList() {
 
         try {
-            service.deleteTodo(999L,1L);
+            service.deleteTodo(999L, 1L);
             fail("Should get a not found exception - todo list not found");
         } catch (NotFoundException ex) {
             assertThat(ex.getErrorType()).isEqualTo(ErrorType.TODOLIST_NOTFOUND);

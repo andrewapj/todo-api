@@ -29,8 +29,9 @@ public class Todo {
 
     /**
      * Merges in the supplied {@link Todo} with this one.
-     * @param newTodo   the todo to merge in.
-     * @return          this modified todo.
+     *
+     * @param newTodo the todo to merge in.
+     * @return this modified todo.
      */
     public Todo merge(final Todo newTodo) {
         return this

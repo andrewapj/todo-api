@@ -28,12 +28,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class UpdateTodoTest {
 
-    @Autowired private TodoController controller;
-    @Autowired private ApiControllerAdvice apiControllerAdvice;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoController controller;
+    @Autowired
+    private ApiControllerAdvice apiControllerAdvice;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_single_todo.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_single_todo.sql"})
     public void should_UpdateTodo() {
 
         // Given: A todo to update
@@ -50,8 +54,8 @@ public class UpdateTodoTest {
 
         // And: The correct data should be in the DB
         doInJPA(this::getEntityManagerFactory, em -> {
-            assertThat(em.find(TodoList.class,1L).getItems()).isNotEmpty();
-            assertThat(em.find(Todo.class,1L).getText()).isEqualTo("A new Todo");
+            assertThat(em.find(TodoList.class, 1L).getItems()).isNotEmpty();
+            assertThat(em.find(Todo.class, 1L).getText()).isEqualTo("A new Todo");
         });
     }
 
@@ -76,7 +80,7 @@ public class UpdateTodoTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:sql/empty_todolist_only.sql"})
     public void should_GetNotFound_WhenUpdatingMissingTodo() {
 
         // Given: A todo to update

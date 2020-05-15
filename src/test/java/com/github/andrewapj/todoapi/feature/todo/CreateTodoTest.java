@@ -26,12 +26,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class CreateTodoTest {
 
-    @Autowired private TodoController controller;
-    @Autowired private ApiControllerAdvice apiControllerAdvice;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoController controller;
+    @Autowired
+    private ApiControllerAdvice apiControllerAdvice;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:sql/empty_todolist_only.sql"})
     public void should_createNewTodo() {
 
         // Given: A Todo to create
@@ -49,12 +53,12 @@ public class CreateTodoTest {
 
         // Then: A new todo item with the correct data and an id should be returned.
         assertThat(apiTodoResponse.getId()).isNotZero();
-        assertThat(apiTodoResponse).isEqualToIgnoringGivenFields(apiTodoToCreate,"id");
+        assertThat(apiTodoResponse).isEqualToIgnoringGivenFields(apiTodoToCreate, "id");
 
         // And: The todolist should contain the todo in the DB
         doInJPA(this::getEntityManagerFactory, em -> {
-            assertThat(em.find(TodoList.class,1L)).isNotNull();
-            assertThat(em.find(TodoList.class,1L).getItems()).isNotEmpty();
+            assertThat(em.find(TodoList.class, 1L)).isNotNull();
+            assertThat(em.find(TodoList.class, 1L).getItems()).isNotEmpty();
         });
     }
 

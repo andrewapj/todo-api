@@ -24,8 +24,8 @@ public class ApiControllerAdvice {
     /**
      * Handles exceptions where a required resource was not found.
      *
-     * @param ex        the exception to handle.
-     * @return          the api error response.
+     * @param ex the exception to handle.
+     * @return the api error response.
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiError> handleException(final NotFoundException ex) {
@@ -37,8 +37,8 @@ public class ApiControllerAdvice {
     /**
      * Handles all other exceptions thrown in the application.
      *
-     * @param ex        the exception to handle.
-     * @return          the api error response.
+     * @param ex the exception to handle.
+     * @return the api error response.
      */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiError> handleException(final RuntimeException ex) {

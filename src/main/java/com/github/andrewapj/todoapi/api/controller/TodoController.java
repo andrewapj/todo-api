@@ -27,9 +27,10 @@ public class TodoController {
 
     /**
      * Create a new {@link Todo} and attach it to the relevant {@link TodoList}.
-     * @param todoListId        the id of the {@link TodoList}.
-     * @param apiTodo           the api representation of the {@link Todo} to be saved.
-     * @return                  the saved data.
+     *
+     * @param todoListId the id of the {@link TodoList}.
+     * @param apiTodo    the api representation of the {@link Todo} to be saved.
+     * @return the saved data.
      */
     @PostMapping(value = "/todolists/{todoListId}/todos",
         consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -46,16 +47,16 @@ public class TodoController {
     /**
      * Updates an existing {@link Todo}.
      *
-     * @param todoListId        the todo list id that the todo is attached to.
-     * @param todoId            the id of the todo item.
-     * @param apiTodo           the data used for the update.
-     * @return                  the updated item.
+     * @param todoListId the todo list id that the todo is attached to.
+     * @param todoId     the id of the todo item.
+     * @param apiTodo    the data used for the update.
+     * @return the updated item.
      */
     @PutMapping(value = "/todolists/{todoListId}/todos/{todoId}",
         consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiTodo> updateTodo(final @PathVariable Long todoListId,
-                                       final @PathVariable Long todoId,
-                                       final @RequestBody ApiTodo apiTodo) {
+                                              final @PathVariable Long todoId,
+                                              final @RequestBody ApiTodo apiTodo) {
         Todo todo = todoPersistenceService.update(
             todoListId, todoId, mapper.toDomainObject(apiTodo));
 

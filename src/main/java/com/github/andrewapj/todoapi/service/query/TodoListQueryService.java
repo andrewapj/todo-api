@@ -13,15 +13,15 @@ public interface TodoListQueryService {
     /**
      * Finds a {@link TodoList} by its id. Fetches all the todo items within the list.
      *
-     * @param todoListId    the id of the todo list.
-     * @return              an optional containing the todo list.
+     * @param todoListId the id of the todo list.
+     * @return an optional containing the todo list.
      */
     Optional<TodoList> findByIdWithTodos(long todoListId);
 
     /**
      * Finds a list of todo list summaries.
      *
-     * @return              a list of todo list summaries.
+     * @return a list of todo list summaries.
      */
     List<TodoListSummary> findSummaries();
 }

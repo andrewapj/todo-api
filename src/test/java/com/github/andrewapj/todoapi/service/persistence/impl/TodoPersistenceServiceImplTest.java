@@ -24,16 +24,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class TodoPersistenceServiceImplTest {
 
-    @Autowired private TodoPersistenceServiceImpl service;
-    @Autowired @Qualifier("fixed") private Clock fixedClock;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoPersistenceServiceImpl service;
+    @Autowired
+    @Qualifier("fixed")
+    private Clock fixedClock;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     /*
      * Create new todo
      */
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:sql/empty_todolist_only.sql"})
     public void should_AddTodo() {
 
         // When: We add a new todo to an existing list
@@ -44,13 +49,13 @@ public class TodoPersistenceServiceImplTest {
             Todo foundTodo = em.find(TodoList.class, 1L).getItems().get(0);
             assertThat(foundTodo.getId()).isNotZero();
             assertThat(foundTodo)
-                .isEqualToIgnoringGivenFields(TestDataFactory.getDefaultTodo(null),"id");
+                .isEqualToIgnoringGivenFields(TestDataFactory.getDefaultTodo(null), "id");
         });
 
         // And: The returned todo should be correct
         assertThat(returnedTodo.getId()).isNotZero();
         assertThat(returnedTodo)
-            .isEqualToIgnoringGivenFields(TestDataFactory.getDefaultTodo(null),"id");
+            .isEqualToIgnoringGivenFields(TestDataFactory.getDefaultTodo(null), "id");
     }
 
     @Test
@@ -72,7 +77,7 @@ public class TodoPersistenceServiceImplTest {
      */
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_single_todo.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_single_todo.sql"})
     public void should_UpdateExistingTodo() {
 
         // When: The todo is updated.
@@ -97,16 +102,16 @@ public class TodoPersistenceServiceImplTest {
     public void should_ThrowNotFound_WhenMissingTodoListForUpdate() {
 
         Todo todo = TestDataFactory.getDefaultTodo(1L);
-        service.update(1L, 1L,todo);
+        service.update(1L, 1L, todo);
     }
 
     @Test(expected = NotFoundException.class)
-    @Sql({"classpath:sql/truncate.sql","classpath:sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:sql/empty_todolist_only.sql"})
     public void should_ThrowNotFound_WhenMissingTodoForUpdate() {
 
         // When: A missing todo is updated.
         // Then: We should get a not found exception
         Todo todo = TestDataFactory.getDefaultTodo(1L);
-        service.update(1L, 1L,todo);
+        service.update(1L, 1L, todo);
     }
 }

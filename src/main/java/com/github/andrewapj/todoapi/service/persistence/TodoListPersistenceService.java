@@ -12,24 +12,24 @@ public interface TodoListPersistenceService {
     /**
      * Creates a new {@link TodoList}.
      *
-     * @return  the new TodoList.
-     * @throws  NotFoundException when the {@link TodoList} could not be created.
+     * @return the new TodoList.
+     * @throws NotFoundException when the {@link TodoList} could not be created.
      */
     TodoList create();
 
     /**
      * Delete this todolist.
      *
-     * @param todoListId    the todolist id.
+     * @param todoListId the todolist id.
      */
     void delete(long todoListId);
 
     /**
      * Delete a {@link Todo} from a {@link TodoList}.
      *
-     * @param todoListId  the todolist to update.
-     * @param todoId      the todo to remove.
-     * @return            the updated todolist.
+     * @param todoListId the todolist to update.
+     * @param todoId     the todo to remove.
+     * @return the updated todolist.
      */
     TodoList deleteTodo(long todoListId, long todoId);
 }

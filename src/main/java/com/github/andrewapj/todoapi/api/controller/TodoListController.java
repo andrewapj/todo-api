@@ -35,7 +35,7 @@ public class TodoListController {
     /**
      * Get a summary of all the todo lists in the system.
      *
-     * @return      a summary of all the todo lists.
+     * @return a summary of all the todo lists.
      */
     @GetMapping(value = "/todolists")
     public ResponseEntity<List<ApiTodoListSummary>> getSummaries() {
@@ -48,8 +48,8 @@ public class TodoListController {
     /**
      * Gets a todo list and its todos.
      *
-     * @param todoListId    the todo list id.
-     * @return              the todo list.
+     * @param todoListId the todo list id.
+     * @return the todo list.
      */
     @GetMapping(value = "/todolists/{todoListId}")
     public ResponseEntity<ApiTodoList> getById(@PathVariable final Long todoListId) {
@@ -70,7 +70,7 @@ public class TodoListController {
     /**
      * Create a new empty {@link TodoList}.
      *
-     * @return      the {@link ApiTodoList}.
+     * @return the {@link ApiTodoList}.
      */
     @PostMapping(value = "/todolists")
     public ResponseEntity<ApiTodoList> create() {
@@ -85,9 +85,9 @@ public class TodoListController {
     /**
      * Deletes a todo from the todo list.
      *
-     * @param todoListId    the todo list id.
-     * @param todoId        the todo to delete.
-     * @return              the current todo list.
+     * @param todoListId the todo list id.
+     * @param todoId     the todo to delete.
+     * @return the current todo list.
      */
     @DeleteMapping(value = "/todolists/{todoListId}/todos/{todoId}")
     ResponseEntity<ApiTodoList> deleteTodo(@PathVariable final Long todoListId,
@@ -103,8 +103,8 @@ public class TodoListController {
     /**
      * Deletes a todo list and its todos.
      *
-     * @param todoListId        the todolist id.
-     * @return                  HTTP 204 if the items was deleted.
+     * @param todoListId the todolist id.
+     * @return HTTP 204 if the items was deleted.
      */
     @DeleteMapping(value = "/todolists/{todoListId}")
     ResponseEntity<ApiEmptyResponse> delete(@PathVariable final Long todoListId) {

@@ -36,8 +36,8 @@ public class TodoList {
     /**
      * Adds a todo to this todo list.
      *
-     * @param todo  the todo item
-     * @return      a list of the todos attached to this todo list.
+     * @param todo the todo item
+     * @return a list of the todos attached to this todo list.
      */
     public List<Todo> addItem(final Todo todo) {
         items.add(todo);

@@ -26,12 +26,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class DeleteTodoListTest {
 
-    @Autowired private TodoListController controller;
-    @Autowired private ApiControllerAdvice apiControllerAdvice;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoListController controller;
+    @Autowired
+    private ApiControllerAdvice apiControllerAdvice;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldDeleteTodoListAndAllTodos() {
 
         // When: We delete the todolist

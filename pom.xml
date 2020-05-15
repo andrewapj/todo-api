@@ -16,12 +16,15 @@
 
     <properties>
         <java.version>11</java.version>
-        <checkstyle.version>8.29</checkstyle.version>
         <equalsverifier.version>3.1.9</equalsverifier.version>
         <hibernate-testing.version>5.3.10.Final</hibernate-testing.version>
-        <lombok.version>1.18.8</lombok.version>
-        <org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
+        <lombok.version>1.18.12</lombok.version>
+        <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
         <rest.assured.version>3.3.0</rest.assured.version>
+        <checkstyle.version>8.32</checkstyle.version>
+        <spotbugs.version>4.0.0</spotbugs.version>
+        <jacoco.version>0.8.5</jacoco.version>
+        <jib.version>2.2.0</jib.version>
     </properties>
 
     <dependencies>
@@ -46,6 +49,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -88,7 +92,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
+                <!-- Force newer checkstyle version -->
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
@@ -98,18 +103,14 @@
                 </dependencies>
                 <configuration>
                     <configLocation>
-                        https://raw.githubusercontent.com/andrewapj/Build/master/java/checkstyle/checkstyle.xml
+                        https://raw.githubusercontent.com/andrewapj/java-code-style/master/checkstyle.xml
                     </configLocation>
                     <!-- Prevent Checkstyle from scanning directories like 'generated-sources' -->
                     <sourceDirectories>
                         <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
                     </sourceDirectories>
-                    <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>false</failsOnError>
-                    <failOnViolation>true</failOnViolation>
                     <violationSeverity>warning</violationSeverity>
-                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -145,7 +146,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>3.1.12</version>
+                <version>${spotbugs.version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -163,7 +164,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.4</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -182,7 +183,7 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>1.5.1</version>
+                <version>${jib.version}</version>
                 <configuration>
                     <to>
                         <image>todo-api</image>

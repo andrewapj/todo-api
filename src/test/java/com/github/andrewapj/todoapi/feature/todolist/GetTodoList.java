@@ -23,17 +23,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class GetTodoList {
 
-    @Autowired private TodoListController controller;
-    @Autowired private ApiControllerAdvice advice;
+    @Autowired
+    private TodoListController controller;
+    @Autowired
+    private ApiControllerAdvice advice;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldGetTodoListWithTodos() {
 
         // When: We find a todo list with two todos
         // Then: The response should be correct.
         ApiTodoList apiTodoList = given()
-            .standaloneSetup(controller,advice)
+            .standaloneSetup(controller, advice)
             .spec(RequestSpecification.SPEC)
             .get("todolists/1")
             .then()
@@ -45,13 +47,13 @@ public class GetTodoList {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/two_todolists_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/two_todolists_with_two_todos.sql"})
     public void shouldGetTodoListSummaries() {
 
         // When: We request all the todolists
         // Then: The response should be correct.
         List<Map<String, Integer>> summaryList = given()
-            .standaloneSetup(controller,advice)
+            .standaloneSetup(controller, advice)
             .spec(RequestSpecification.SPEC)
             .get("todolists/")
             .then()
@@ -72,7 +74,7 @@ public class GetTodoList {
         // When: We search for a todo list that does not exist.
         // Then: The response should be correct.
         ApiError apiError = given()
-            .standaloneSetup(controller,advice)
+            .standaloneSetup(controller, advice)
             .spec(RequestSpecification.SPEC)
             .get("todolists/1")
             .then()

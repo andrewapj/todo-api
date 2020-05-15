@@ -16,10 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class TodoListQueryServiceImplTest {
 
-    @Autowired private TodoListQueryServiceImpl service;
+    @Autowired
+    private TodoListQueryServiceImpl service;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldGetTodoList() {
 
         TodoList todoList = service.findByIdWithTodos(1L).orElseThrow();
@@ -29,7 +30,7 @@ public class TodoListQueryServiceImplTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/two_todolists_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/two_todolists_with_two_todos.sql"})
     public void shouldGetTodoListSummary() {
 
         List<TodoListSummary> summaries = service.findSummaries();

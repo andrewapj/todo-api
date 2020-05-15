@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ClockConfig {
 
+    /**
+     * Builds a new Clock.
+     *
+     * @return The new clock instance.
+     */
     @Bean
     public Clock getClock() {
         return Clock.systemUTC();

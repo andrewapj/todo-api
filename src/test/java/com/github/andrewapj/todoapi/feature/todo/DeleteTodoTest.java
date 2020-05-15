@@ -25,12 +25,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class DeleteTodoTest {
 
-    @Autowired private TodoListController controller;
-    @Autowired private ApiControllerAdvice apiControllerAdvice;
-    @Autowired @Getter private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private TodoListController controller;
+    @Autowired
+    private ApiControllerAdvice apiControllerAdvice;
+    @Autowired
+    @Getter
+    private EntityManagerFactory entityManagerFactory;
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/single_todolist_with_two_todos.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/single_todolist_with_two_todos.sql"})
     public void shouldDeleteTodoFromTodoList() {
 
         // When: A todo is deleted from the todolist
@@ -76,7 +80,7 @@ public class DeleteTodoTest {
     }
 
     @Test
-    @Sql({"classpath:sql/truncate.sql","classpath:/sql/empty_todolist_only.sql"})
+    @Sql({"classpath:sql/truncate.sql", "classpath:/sql/empty_todolist_only.sql"})
     public void shouldGet404WhenDeletingMissingTodo() {
 
         // When: We try to delete a missing todo form a todolist without items

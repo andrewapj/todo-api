@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TodoListRepository extends JpaRepository<TodoList, Long> {
 
+    /**
+     * Finds a todo list by id and fetches the todo items within it also.
+     *
+     * @param todoListId the todo list id.
+     * @return an optional containing the todo list.
+     */
     @Query("SELECT t FROM TodoList t LEFT JOIN FETCH t.items td WHERE t.id = :todoListId")
     Optional<TodoList> findByIdWithTodos(@Param("todoListId") long todoListId);
 }
