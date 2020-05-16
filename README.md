@@ -26,7 +26,7 @@ This will build the application jar, run the tests and run the code quality plug
 ### Building a docker image
 
 - Run docker locally on your machine  
-- ```mvn compile jib:dockerBuild``` 
+- ```mvn spring-boot:build-image``` 
 
 ## Running
 
